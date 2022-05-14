@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.oneToMany.dao.UserMapper">
+    <!-- type表示大的那一个类的类型 -->
+    <resultMap id="userOrdersMap" type="com.mybatis.oneToMany.bean.User">
+        <id property="id" column="id"/>
+        <result property="user_name" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="role_id" column="role_id"/>
+        <result property="date_first" column="date_first"/>
+        <!-- property代表类中的属性,ofType表示property属性集合中的存储数据的数据类型 -->
+        <collection property="orders" column="order_id" ofType="com.mybatis.oneToMany.bean.Orders">
+            <id property="order_id" column="order_id"/>
+            <result property="uid" column="uid"/>
+            <result property="goods" column="goods"/>
+            <result property="address" column="address"/>
+            <result property="price" column="price"/>
+            <result property="num" column="num"/>
+            <result property="detail" column="detail"/>
+        </collection>
+    </resultMap>
+
+    <!--<select id="findAllOrderByUserId" resultType="com.mybatis.oneToMany.bean.User" parameterType="Integer">
+        select * from user a, orders b where a.id = b.uid and a.id = #{uid}
+    </select>-->
+    <select id="findAllOrderByUserId" resultMap="userOrdersMap" parameterType="Integer">
+        select * from user a, orders b where a.id = b.uid and a.id = #{uid}
+    </select>
+
+</mapper>

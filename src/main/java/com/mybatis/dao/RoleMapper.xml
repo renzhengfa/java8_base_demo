@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.RoleMapper">
+    
+    <!-- sql引用 前提是要有这个方法-->
+    <!--<select id="defaultRole">
+        select * from role
+    </select>-->
+    
+    <!--  因为sqlMapConfig.xml中编写了typeAliases的package指向了基本bean的包，所以结果集类型可以直接写role  -->
+    <select id="queryRolesByIds" parameterType="com.mybatis.bean.RoleQueryVo" resultType="Role">
+        select * from role
+        <!--<include refid="defaultRole"></include>-->
+        <where>
+            <if test="ids!=null and ids.size()>0">
+                <foreach collection="ids" open="and role_id in (" close=")" item="uid" separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+</mapper>

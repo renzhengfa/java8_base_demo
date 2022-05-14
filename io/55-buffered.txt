@@ -1,0 +1,1 @@
+这是采用缓冲流BufferedOutputStream写入文件的数据。

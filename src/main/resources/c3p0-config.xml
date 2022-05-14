@@ -1,0 +1,13 @@
+<c3p0-config>
+    <!--使用默认配置对象-->
+    <default-config>
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/db_kuiniu</property>
+        <property name="user">root</property>
+        <property name="password">123456</property>
+        <property name="initialPoolSize">5</property>
+        <property name="maxPoolSize">10</property>
+        <!--2秒超时-->
+        <property name="checkoutTimeout">2000</property>
+    </default-config>
+</c3p0-config>

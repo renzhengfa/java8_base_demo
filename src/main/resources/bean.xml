@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="user" class="com.spring.bean.User" scope="singleton">
+        <!--
+        singleton:  单例模式
+        prototype:  多例模式
+        request:    作用于web应用的请求范围
+        session:    作用于web应用的会话范围
+        global-session:作用于集群环境的会话范围(当没有集群环境时就相当于session)
+        -->
+    </bean>
+
+    <!-- 扫描它及其子包内的注解 -->
+    <context:component-scan base-package="com.spring"/>
+</beans>

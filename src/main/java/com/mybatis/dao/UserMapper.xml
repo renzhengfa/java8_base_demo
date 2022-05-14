@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.UserMapper">
+    <!--增加用户信息返回插入数据的id值-->
+    <insert id="addUser" parameterType="user">
+        <selectKey keyProperty="id" keyColumn="id" resultType="Integer" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into
+        user(user_name, password, role_id, date_first)
+        values (#{user_name}, #{password}, #{role_id}, #{date_first})
+    </insert>
+
+    <!--删除用户信息-->
+    <delete id="deleteUserById">
+        delete from user where id = #{id}
+    </delete>
+
+    <!--修改用户密码信息-->
+    <update id="updateUser">
+        update user set password = #{password} where id = #{id}
+    </update>
+
+    <!--查询所有用户信息-->
+    <select id="findAllUser" resultType="com.mybatis.bean.User">
+        select * from user
+    </select>
+    <!--查询统计用户数量-->
+    <select id="countUser" resultType="Integer">
+        select count(1) from user
+    </select>
+    <!--模糊查询-->
+    <select id="queryUser" resultType="com.mybatis.bean.User">
+        select * from user where user_name like #{user_name}
+    </select>
+    <!--登录查询-->
+    <select id="login" resultType="user">
+        select * from user where user_name = #{user_name} and password = #{password}
+    </select>
+    <select id="loginTh" resultType="com.mybatis.bean.User">
+        select * from user where user_name = #{user_name} and password = #{password} and role_id = #{role_id}
+    </select>
+</mapper>

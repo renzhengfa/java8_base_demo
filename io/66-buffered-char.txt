@@ -1,0 +1,2 @@
+line1:这是使用BufferedWriter缓冲字符写入流写入的数据
+line2:这是第二行。！！！
